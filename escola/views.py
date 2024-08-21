@@ -24,3 +24,18 @@ class MatriculaViewSet(viewsets.ModelViewSet):
     queryset = Matricula.objects.all()
     serializer_class = MatriculaSerializer
 
+class ListaMatriculaEstudante(generics.ListAPIView):
+    def get_queryset(self):
+        queryset = Matricula.objects.filter(estudante_id=self.kwargs['pk'])
+        #querySQL = select * from Matricula where estudante.id = ?;
+        return queryset
+    serializer_class = ListaMatriculasEstudanteSerializer
+
+class ListaMatriculaCurso(generics.ListAPIView):
+    def get_queryset(self):
+        queryset = Matricula.objects.filter(curso_id=self.kwargs['pk'])
+        return queryset
+    serializer_class = ListaMatriculasCursoSerializer
+
+
+
